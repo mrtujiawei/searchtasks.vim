@@ -1,4 +1,4 @@
-" searchtasks.vim - Search TODO, FIXME and XXX tasks
+" searchtasks.vim - Search TODO and FIXME tasks
 " Maintainer:   Gilson Filho <http://gilsondev.com>
 " Version:      1.0
 
@@ -9,7 +9,7 @@ endif
 let g:searchtasks_loaded=1
 
 if !exists("g:searchtasks_list")
-  let g:searchtasks_list=["TODO", "FIXME", "XXX"]
+  let g:searchtasks_list=["TODO", "FIXME"]
 endif
 
 " Search tasks {{{

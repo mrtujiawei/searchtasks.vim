@@ -46,7 +46,7 @@ CONFIGURATIONS					*searchtasks-configurations*
 
 If you want to change or enter new labels for searchtask search, just enter the following in your configuration .vimrc: >
 
-    let g:searchtasks_list=["TODO", "FIXME", "XXX"]
+    let g:searchtasks_list=["TODO", "FIXME"]
 <
 
 vim:tw=78:ts=8:ft=help:norl:
