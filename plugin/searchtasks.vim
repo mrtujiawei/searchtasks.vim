@@ -46,8 +46,8 @@ endfunction
 " }}}
 
 if exists("grepadd") || v:version > 700
-  command -nargs=1 -complete=dir SearchTasksGrep call s:SearchTasksGrep('<args>')
+  command -nargs=* -complete=file SearchTasksGrep call s:SearchTasksGrep('<f-args>')
 endif
 
-command -nargs=1 -complete=dir SearchTasks call s:SearchTasks('<args>')
+command -nargs=* -complete=file SearchTasks call s:SearchTasks('<f-args>')
 " vim:set sw=2 sts=2:
