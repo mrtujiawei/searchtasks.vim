@@ -19,21 +19,7 @@ function s:SearchTasks(...)
     return ''
   endif
 
-  let l:flag = 1
-  for task in g:searchtasks_list
-    for directory in a:000
-      if l:flag
-        try 
-          execute 'vimgrep /' . task . '/gj ' . directory
-        catch /.*/
-          " Ignore error
-        endtry
-        let l:flag = 0
-      else
-        execute 'vimgrepadd /' . task . '/gj ' . directory
-      endif
-    endfor
-  endfor
+  execute 'vimgrep /\(' . join(g:searchtasks_list, '\|') . '\)/gj ' . join(a:000)
 
   " show results
   cwindow
@@ -51,7 +37,7 @@ function s:SearchTasksGrep(...)
   let l:flag = 1
   for task in g:searchtasks_list
     for directory in a:000
-      if l:flag == 1
+      if l:flag
         execute 'silent! :grep ' . task . ' ' . directory
         let l:flag = 0
       else
