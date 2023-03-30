@@ -13,14 +13,16 @@ if !exists("g:searchtasks_list")
 endif
 
 " Search tasks {{{
-function s:SearchTasks(directory)
-  if a:directory
+function s:SearchTasks(...)
+  if a:0 == 0
     echo "Directory is required (e.g: SearchTasks **/*.c)."
     return ''
   endif
 
   for task in g:searchtasks_list
-    execute 'vimgrepadd /' . task . '/gj ' . a:directory
+    for directory in a:000
+      execute 'vimgrep /' . task . '/gj ' . directory
+    endfor
   endfor
 
   " show results
@@ -30,14 +32,16 @@ endfunction
 
 
 " Search tasks with :grep {{{
-function s:SearchTasksGrep(directory)
-  if a:directory
+function s:SearchTasksGrep(...)
+  if a:0 == 0
     echo "Directory is required (e.g: SearchTasksGrep **/*.c)."
     return ''
   endif
 
   for task in g:searchtasks_list
-    execute 'silent :grepadd ' . task . ' ' . a:directory
+    for directory in a:000
+      execute 'silent :grepadd ' . task . ' ' . directory
+    endfor
   endfor
 
   " show results
@@ -46,8 +50,8 @@ endfunction
 " }}}
 
 if exists("grepadd") || v:version > 700
-  command -nargs=* -complete=file SearchTasksGrep call s:SearchTasksGrep('<f-args>')
+  command -nargs=* -complete=file SearchTasksGrep call s:SearchTasksGrep('<args>')
 endif
 
-command -nargs=* -complete=file SearchTasks call s:SearchTasks('<f-args>')
+command -nargs=* -complete=file SearchTasks call s:SearchTasks('<args>')
 " vim:set sw=2 sts=2:
