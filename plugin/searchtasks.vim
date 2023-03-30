@@ -23,10 +23,14 @@ function s:SearchTasks(...)
   for task in g:searchtasks_list
     for directory in a:000
       if l:flag
-        execute 'silent! vimgrep /' . task . '/gj ' . directory
+        try 
+          execute 'vimgrep /' . task . '/gj ' . directory
+        catch /.*/
+          " Ignore error
+        endtry
         let l:flag = 0
       else
-        execute 'vimgrep /' . task . '/gj ' . directory
+        execute 'vimgrepadd /' . task . '/gj ' . directory
       endif
     endfor
   endfor
