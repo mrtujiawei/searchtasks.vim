@@ -38,7 +38,7 @@ function s:SearchTasksGrep(...)
   for task in g:searchtasks_list
     for directory in a:000
       if l:flag
-        execute 'silent! :grep ' . task . ' ' . directory
+        execute 'silent :grep ' . task . ' ' . directory
         let l:flag = 0
       else
         execute 'silent :grepadd ' . task . ' ' . directory
