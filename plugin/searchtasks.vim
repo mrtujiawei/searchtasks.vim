@@ -19,9 +19,15 @@ function s:SearchTasks(...)
     return ''
   endif
 
+  let l:flag = 1
   for task in g:searchtasks_list
     for directory in a:000
-      execute 'vimgrep /' . task . '/gj ' . directory
+      if l:flag
+        execute 'silent! vimgrep /' . task . '/gj ' . directory
+        let l:flag = 0
+      else
+        execute 'vimgrep /' . task . '/gj ' . directory
+      endif
     endfor
   endfor
 
@@ -38,9 +44,15 @@ function s:SearchTasksGrep(...)
     return ''
   endif
 
+  let l:flag = 1
   for task in g:searchtasks_list
     for directory in a:000
-      execute 'silent :grepadd ' . task . ' ' . directory
+      if l:flag == 1
+        execute 'silent! :grep ' . task . ' ' . directory
+        let l:flag = 0
+      else
+        execute 'silent :grepadd ' . task . ' ' . directory
+      endif
     endfor
   endfor
 
